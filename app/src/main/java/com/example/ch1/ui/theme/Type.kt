@@ -3,8 +3,52 @@ package com.example.ch1.ui.theme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.text.googlefonts.Font
+import com.example.ch1.R
+import androidx.compose.ui.text.font.Font
+
+val provider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+val fontName = GoogleFont("Lobster Two")
+
+val fontFamily = FontFamily(
+    Font(
+        googleFont = fontName,
+        fontProvider = provider,
+        weight = FontWeight.Bold,
+        style = FontStyle.Italic
+    )
+)
+
+val robotoBold = FontFamily(
+    Font(R.font.roboto_extrabold),
+    Font(R.font.roboto_extrabolditalic)
+)
+
+val monttsserrat = FontFamily(
+    Font(R.font.montserrat_alternates_semibold)
+)
+
+private val montt = TextStyle(fontFamily = monttsserrat, fontWeight = FontWeight.Normal)
+val montt25 = montt.copy(fontSize = 25.sp)
+
+private val roboto =
+    TextStyle(fontFamily = robotoBold, fontWeight = FontWeight.Normal, lineHeight = 24.sp)
+
+val roboto15 = roboto.copy(fontSize = 15.sp)
+
+//val lobster16 = lobsterStyle.copy(fontSize = 16.sp)
+//
+//private val lobsterStyle: TextStyle =
+//    TextStyle(fontFamily = fontFamily, fontWeight = FontWeight.Bold)
 
 // Set of Material typography styles to start with
 val Typography = Typography(
