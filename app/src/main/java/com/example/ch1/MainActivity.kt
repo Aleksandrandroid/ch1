@@ -59,26 +59,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ProfileScreen() {
-    var bellColor by remember { mutableStateOf(Color.DarkGray) }
-    var faceColor by remember { mutableStateOf(Color.DarkGray) }
-    var doneColor by remember { mutableStateOf(Color.DarkGray) }
-    var likeColor by remember { mutableStateOf(Color.DarkGray) }
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+    ) {
+        ScreenTop()
+        ScreenBottom()
+    }
+}
+
+@Composable
+fun ScreenTop() {
+    var likeColor by remember { mutableStateOf(Color.White) }
 
     Card(
         modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(10.dp),
-
-        )
-
+        shape = RoundedCornerShape(10.dp)
+    )
     {
         Column(
             modifier = Modifier
-                .background(color = Color.Gray)
+                .background(color = Color(0xFF284578))
                 .fillMaxWidth()
                 .height(400.dp),
 
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
 
             ) {
             Image(
@@ -87,106 +93,132 @@ fun ProfileScreen() {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(bottom = 35.dp)
             )
             Text(
                 text = "Красивый пейзаж",
+                color = Color.White,
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                style = montt25
             )
 
             Text(
                 text = "Озеро в горах",
-                fontSize = 16.sp
+                color = Color.White,
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .padding(15.dp),
+                style = montt25
             )
 
             IconButton(
-                onClick = { likeColor = Color(0xFF7D5260) },
-                modifier = Modifier.align(Alignment.End)
+                onClick = { likeColor = Color(0xFFE3861E) },
+                modifier = Modifier
+                    // .align(Alignment.End)
+                    .padding(start = 270.dp, bottom = 10.dp)
+
             ) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Like",
                     tint = likeColor,
                     modifier = Modifier
-                        .size(40.dp),
+                        .size(35.dp)
                 )
             }
-
-
         }
     }
 
+}
 
-    //нижняя колонка с чебурашкой
 
-    Column(
+@Composable
+fun ScreenBottom() {
+    var bellColor by remember { mutableStateOf(Color.White) }
+    var faceColor by remember { mutableStateOf(Color.White) }
+    var doneColor by remember { mutableStateOf(Color.White) }
+
+    Card(
         modifier = Modifier
+            .padding(8.dp)
             .fillMaxSize(),
-//            .background(color = Color.LightGray),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
+        shape = RoundedCornerShape(10.dp)
     ) {
-        Image(
-            painter = painterResource(R.drawable.cheburashka),
-            contentDescription = "QWERTY",
+        Column(
             modifier = Modifier
-                .size(150.dp)
-                .clip(RoundedCornerShape(16.dp)),
-            contentScale = ContentScale.FillWidth
-
-        )
-
-        Text(
-            text = "Profile",
-            style = montt25,
-            color = Color(0xFF6200EE),
-            modifier = Modifier,
-            textAlign = TextAlign.End
-        )
-
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(30.dp)
+                .fillMaxSize()
+                .background(color = Color(0xFF284578)),
+            horizontalAlignment = Alignment.CenterHorizontally,
+               verticalArrangement = Arrangement.Center
         ) {
-            IconButton(onClick = { doneColor = Color(0xFFbd4a59) }) {
-                Icon(
-                    imageVector = Icons.Default.Done,
-                    contentDescription = "Ready",
-                    tint = doneColor,
-                    modifier = Modifier
-                        .size(50.dp)
+            Image(
+                painter = painterResource(R.drawable.cheburashka),
+                contentDescription = "Cheburaha",
+                modifier = Modifier
+                    .size(180.dp),
+                //   .padding(bottom = 25.dp),
+                // .clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.FillWidth,
 
-                )
+
+            )
+
+            Text(
+                text = "Profile",
+                style = montt25,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(top = 10.dp, bottom = 15.dp),
+                textAlign = TextAlign.End
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(30.dp)
+            ) {
+                IconButton(onClick = { doneColor = Color(0xFFE3861E) }) {
+                    Icon(
+                        imageVector = Icons.Default.Done,
+                        contentDescription = "Ready",
+                        tint = doneColor,
+                        modifier = Modifier
+                            .size(35.dp)
+                        //   .padding(bottom = 20.dp)
+
+                    )
+                }
+
+                IconButton(onClick = { faceColor = Color(0xFFE3861E) }) {
+                    Icon(
+                        imageVector = Icons.Default.Face,
+                        contentDescription = "Face",
+                        tint = faceColor,
+                        modifier = Modifier
+                            .size(35.dp)
+
+                    )
+                }
+
+                IconButton(onClick = { bellColor = Color(0xFFE3861E) }) {
+                    Icon(
+                        imageVector = Icons.Default.Notifications,
+                        contentDescription = "Bell",
+                        tint = bellColor,
+                        modifier = Modifier
+                            .size(35.dp)
+                    )
+                }
             }
 
-            IconButton(onClick = { faceColor = Color(0xFFFF4081) }) {
-                Icon(
-                    imageVector = Icons.Default.Face,
-                    contentDescription = "Face",
-                    tint = faceColor,
-                    modifier = Modifier
-                        .size(50.dp)
-
-                )
-            }
-
-            IconButton(onClick = { bellColor = Color(0xFFFF4081) }) {
-                Icon(
-                    imageVector = Icons.Default.Notifications,
-                    contentDescription = "Bell",
-                    tint = bellColor,
-                    modifier = Modifier
-                        .size(50.dp)
-                )
-            }
         }
-
     }
+
 
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun BirthdayCardPreview() {
+fun Preview() {
     ProfileScreen()
 }
